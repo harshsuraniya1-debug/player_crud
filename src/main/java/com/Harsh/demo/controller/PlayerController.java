@@ -30,7 +30,7 @@ public PlayerDto createPlayer( @RequestBody PlayerDto playerDto){
 
 }
 
-@PutMapping
+@PutMapping("/{id")
 public PlayerDto updatePlayer(@RequestBody PlayerDto playerDto,@PathVariable("id") long playerid){
   return playerService.updatePlayer(playerDto,playerid);
 
