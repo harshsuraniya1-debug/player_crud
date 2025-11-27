@@ -67,10 +67,11 @@ public class PlayerService {
         }
 
 
-        public void deleteAllPlayer () {
+        public void deleteAllPlayer(){
             playerRepository.deleteAll();
         }
-        public void deleteById (long id){
+
+        public void deleteById(long id){
             playerRepository.deleteById(id);
         }
 
