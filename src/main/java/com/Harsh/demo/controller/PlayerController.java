@@ -1,16 +1,14 @@
 package com.Harsh.demo.controller;
 
 import com.Harsh.demo.dto.PlayerDto;
-import com.Harsh.demo.repository.PlayerRepository;
 import com.Harsh.demo.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/players")
 public class PlayerController {
 
  @Autowired
