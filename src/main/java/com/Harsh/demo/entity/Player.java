@@ -14,6 +14,7 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Player {
+
     @Id
     @GeneratedValue
     private long id;
