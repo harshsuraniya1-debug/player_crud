@@ -3,11 +3,10 @@ package com.Harsh.demo.mapper;
 import com.Harsh.demo.dto.PlayerDto;
 import com.Harsh.demo.entity.Player;
 
-public class Mapperutil {
+public class MapperUtil {
 
     public static Player toEntity (PlayerDto playerDto){
         Player player = new Player();
-        //player.setId(playerDto.getId());
         player.setTeam(playerDto.getTeam());
         player.setName(playerDto.getName());
         player.setJersey(playerDto.getJersey());

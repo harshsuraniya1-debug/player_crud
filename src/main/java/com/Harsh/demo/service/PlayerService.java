@@ -2,7 +2,7 @@ package com.Harsh.demo.service;
 
 import com.Harsh.demo.dto.PlayerDto;
 import com.Harsh.demo.entity.Player;
-import com.Harsh.demo.mapper.Mapperutil;
+import com.Harsh.demo.mapper.MapperUtil;
 import com.Harsh.demo.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class PlayerService {
 
         List<PlayerDto> playerDtoList = new ArrayList<>();
         for (Player p : playerList) {
-            PlayerDto playerDto = Mapperutil.toDto(p);
+            PlayerDto playerDto = MapperUtil.toDto(p);
             playerDtoList.add(playerDto);
 
         }
@@ -34,25 +34,24 @@ public class PlayerService {
         Optional<Player> player = playerRepository.findById(id);
 
         if (player.isPresent()) {
-            return Mapperutil.toDto(player.get());
+            return MapperUtil.toDto(player.get());
         }
         throw new RuntimeException("player id is not present : " + id);
     }
 
     public PlayerDto createPlayer(PlayerDto playerDto) {
-        Player player = Mapperutil.toEntity(playerDto);
+        Player player = MapperUtil.toEntity(playerDto);
         Player savedplayer = playerRepository.save(player);
 
-        return Mapperutil.toDto(savedplayer);
+        return MapperUtil.toDto(savedplayer);
     }
 
     public PlayerDto updatePlayer(PlayerDto playerDto, long id) {
-        Optional<Player> allReadyPlayer = playerRepository.findById(id);
+        Optional<Player> player = playerRepository.findById(id);
 
-        if (allReadyPlayer.isPresent()) {
+        if (player.isPresent()) {
 
-            Player tempPlayer = allReadyPlayer.get();
-
+            Player tempPlayer = player.get();
             tempPlayer.setAge(playerDto.getAge());
             tempPlayer.setName(playerDto.getName());
             tempPlayer.setJersey(playerDto.getJersey());
@@ -60,11 +59,12 @@ public class PlayerService {
 
             Player upplayer = playerRepository.save(tempPlayer);
 
-            return Mapperutil.toDto(upplayer);
+            return MapperUtil.toDto(upplayer);
 
-        } else {
-            throw new RuntimeException("player is not is the records with this id : " + id);
         }
+
+        throw new RuntimeException("player is not is the records with this id : " + id);
+
     }
 
 
