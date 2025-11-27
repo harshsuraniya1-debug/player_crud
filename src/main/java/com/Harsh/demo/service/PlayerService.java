@@ -14,69 +14,68 @@ import java.util.Optional;
 @Service
 public class PlayerService {
 
-@Autowired
+    @Autowired
     private PlayerRepository playerRepository;
 
- public List<PlayerDto> getAllPlayers(){
-     List<Player> playerList =playerRepository.findAll();
+    public List<PlayerDto> getAllPlayers() {
+        List<Player> playerList = playerRepository.findAll();
 
-     List<PlayerDto> playerDtoList = new ArrayList<>();
-     for (Player p: playerList){
-         PlayerDto playerDto = Mapperutil.toDto(p);
-         playerDtoList.add(playerDto);
+        List<PlayerDto> playerDtoList = new ArrayList<>();
+        for (Player p : playerList) {
+            PlayerDto playerDto = Mapperutil.toDto(p);
+            playerDtoList.add(playerDto);
 
-     }
-     return playerDtoList;
-
- }
-
-  public PlayerDto playerById(long id){
-    Optional<Player> player=playerRepository.findById(id);
-
-    if(player.isPresent()){
-        return Mapperutil.toDto(player.get());
         }
-    throw new RuntimeException("player id is not present : " + id);
+        return playerDtoList;
+
     }
 
-    public PlayerDto createPlayer(PlayerDto playerDto){
-     Player player = Mapperutil.toEntity(playerDto);
-     Player savedplayer= playerRepository.save(player);
+    public PlayerDto playerById(long id) {
+        Optional<Player> player = playerRepository.findById(id);
 
-     return Mapperutil.toDto(savedplayer);
+        if (player.isPresent()) {
+            return Mapperutil.toDto(player.get());
+        }
+        throw new RuntimeException("player id is not present : " + id);
     }
 
-    public PlayerDto updatePlayer(PlayerDto playerDto,long id ){
-      Optional<Player> allReadyPlayer=playerRepository.findById(id);
+    public PlayerDto createPlayer(PlayerDto playerDto) {
+        Player player = Mapperutil.toEntity(playerDto);
+        Player savedplayer = playerRepository.save(player);
 
-      if(allReadyPlayer.isPresent()){
-
-      }
-          Player tempPlayer = allReadyPlayer.get();
-
-          tempPlayer.setAge(playerDto.getAge());
-          tempPlayer.setName(playerDto.getName());
-          tempPlayer.setJersey(playerDto.getJersey());
-          tempPlayer.setTeam(playerDto.getTeam());
-
-          Player upplayer=  playerRepository.save(tempPlayer);
-
-          return Mapperutil.toDto(upplayer);
-
-      }
-      else {
-      throw new RuntimeException("player is not is the records with this id : " + id );
+        return Mapperutil.toDto(savedplayer);
     }
 
+    public PlayerDto updatePlayer(PlayerDto playerDto, long id) {
+        Optional<Player> allReadyPlayer = playerRepository.findById(id);
 
-    public void deleteAllPlayer(){
-     playerRepository.deleteAll();
-    }
-    public void deleteById(long id ){
-     playerRepository.deleteById(id);
-    }
+        if (allReadyPlayer.isPresent()) {
 
-  }
+            Player tempPlayer = allReadyPlayer.get();
+
+            tempPlayer.setAge(playerDto.getAge());
+            tempPlayer.setName(playerDto.getName());
+            tempPlayer.setJersey(playerDto.getJersey());
+            tempPlayer.setTeam(playerDto.getTeam());
+
+            Player upplayer = playerRepository.save(tempPlayer);
+
+            return Mapperutil.toDto(upplayer);
+
+        } else {
+            throw new RuntimeException("player is not is the records with this id : " + id);
+        }
+
+
+        public void deleteAllPlayer () {
+            playerRepository.deleteAll();
+        }
+        public void deleteById (long id){
+            playerRepository.deleteById(id);
+        }
+
+    }
+}
 
 
 
