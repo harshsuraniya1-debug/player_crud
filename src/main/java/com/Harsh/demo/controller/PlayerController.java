@@ -18,34 +18,34 @@ private PlayerService playerService;
 
  @GetMapping
 public List<PlayerDto> getAllPlayers (PlayerDto playerDto){
-
-
+     return playerService.getAllPlayers();
 }
 
 @GetMapping("/{id}")
-public PlayerDto playerById(long id){
-
+public PlayerDto playerById(@PathVariable("id") long playerid){
+     return playerService.playerById(playerid);
 }
 
 @PostMapping
-@ResponseBody
-public PlayerDto createPlayer( PlayerDto playerDto){
+public PlayerDto createPlayer( @RequestBody PlayerDto playerDto){
+    return playerService.createPlayer(playerDto);
 
 }
 
 @PutMapping
-public PlayerDto updatePlayer(PlayerDto playerDto,long id){
-
+public PlayerDto updatePlayer(@RequestBody PlayerDto playerDto,@PathVariable("id") long playerid){
+  return playerService.updatePlayer(playerDto,playerid);
 
 }
 
 @DeleteMapping
-public void deleteAll(){
+public void deleteAllPlayer(){
+     playerService.deleteAllPlayer();
 
 }
 
 @DeleteMapping("/{id}")
-    public void deleteById(long id ){
-
+    public void deleteById(@PathVariable("id") long playerid ){
+    playerService.deleteById(playerid);
 }
 }

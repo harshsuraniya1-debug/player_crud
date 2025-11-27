@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlayerService {
@@ -29,7 +30,54 @@ public class PlayerService {
 
  }
 
+  public PlayerDto playerById(long id){
+    Optional<Player> player=playerRepository.findById(id);
+
+    if(player.isPresent()){
+        return Mapperutil.toDto(player.get());
+        }
+    throw new RuntimeException("player id is not present : " + id);
+    }
+
+    public PlayerDto createPlayer(PlayerDto playerDto){
+     Player player = Mapperutil.toEntity(playerDto);
+     Player savedplayer= playerRepository.save(player);
+
+     return Mapperutil.toDto(savedplayer);
+    }
+
+    public PlayerDto updatePlayer(PlayerDto playerDto,long id ){
+      Optional<Player> allReadyPlayer=playerRepository.findById(id);
+
+      if(allReadyPlayer.isPresent()){
+
+      }
+          Player tempPlayer = allReadyPlayer.get();
+
+          tempPlayer.setAge(playerDto.getAge());
+          tempPlayer.setName(playerDto.getName());
+          tempPlayer.setJersey(playerDto.getJersey());
+          tempPlayer.setTeam(playerDto.getTeam());
+
+          Player upplayer=  playerRepository.save(tempPlayer);
+
+          return Mapperutil.toDto(upplayer);
+
+      }
+      else {
+      throw new RuntimeException("player is not is the records with this id : " + id );
+    }
+
+
+    public void deleteAllPlayer(){
+     playerRepository.deleteAll();
+    }
+    public void deleteById(long id ){
+     playerRepository.deleteById(id);
+    }
+
+  }
 
 
 
-}
+
