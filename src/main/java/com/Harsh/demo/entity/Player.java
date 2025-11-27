@@ -18,6 +18,6 @@ public class Player {
 
     private String name;
     private String team;
-    private int jersey;
+    private String jersey;
     private int age;
 }
