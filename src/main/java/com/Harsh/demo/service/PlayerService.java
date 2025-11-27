@@ -65,6 +65,7 @@ public class PlayerService {
         } else {
             throw new RuntimeException("player is not is the records with this id : " + id);
         }
+    }
 
 
         public void deleteAllPlayer(){
@@ -76,7 +77,7 @@ public class PlayerService {
         }
 
     }
-}
+
 
 
 
